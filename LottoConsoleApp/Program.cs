@@ -23,15 +23,25 @@ namespace LottoConsoleApp
 
             //2 - systemet skal trekke 7 tall og putte det i en array lottoTall. Samme som over.
 
+            int[] lottoSystem = new int[7];
+            for (int i = 0; i < lottoSystem.Length; i++)
+            {
+                lottoSystem[i] = random.Next(1, 35);
+            }
+
             //3 - Sjekke hvor mange rette man har
 
-            foreach(int i in lottoLapp)
+
+            foreach (int i in lottoLapp)
             {
-                
+                bool found=FindNumber(i, lottoSystem);
+                if(found)
+                    antallRette++;
             }
 
             //           Skrive ut antall rette:
             Console.WriteLine(antallRette);
+            Console.ReadLine();
 
         }
 
@@ -42,7 +52,7 @@ namespace LottoConsoleApp
         /// <param name="lottoNum"></param>
         /// <returns> bool</returns>
         public static bool FindNumber(int userNum,int[] lottoNum)
-        {
+        {            
             foreach(int num in lottoNum)
             {
                 if(num==userNum)
