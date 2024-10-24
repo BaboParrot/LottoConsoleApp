@@ -14,19 +14,33 @@ namespace LottoConsoleApp
             Random random = new Random();
             //1 - trekke 7 tall, vi tar det vha random
             int[] lottoLapp = new int[7];
-            for(int i=0;i<lottoLapp.Length;i++)
+            HashSet<int> UlikeTall = new HashSet<int>(); // bruker hashset til å holde oversikt på hvilke tall som har blitt trukket. Hashset kan ikke ha duplikate verdier.
+            for (int i = 0; i < lottoLapp.Length; i++)
             {
-                lottoLapp[i] = random.Next(1, 35);
+                int number;
+                do
+                {
+                    number = random.Next(1, 35);
+                } while (!UlikeTall.Add(number)); // sørger for at den finner en ny verdi helt til det kommer en verdi som ikke har blitt nevnt. 
+                lottoLapp[i] = number;  
             }
 
-            //nå har vi en ferdig lottolapp
 
-            //2 - systemet skal trekke 7 tall og putte det i en array lottoTall. Samme som over.
 
-            int[] lottoSystem = new int[7];
-            for (int i = 0; i < lottoSystem.Length; i++)
+                //nå har vi en ferdig lottolapp
+
+                //2 - systemet skal trekke 7 tall og putte det i en array lottoTall. Samme som over.
+
+                int[] lottoSystem = new int[7];
+            UlikeTall.Clear();
+            for (int i = 0; i < lottoSystem.Length; i++) // denne delen gjør det samme men for LottoSystem. 
             {
-                lottoSystem[i] = random.Next(1, 35);
+                int number;
+                do
+                {
+                    number = random.Next(1, 35);
+                } while(UlikeTall.Add(number));
+                lottoSystem[i] = number;
             }
 
             //3 - Sjekke hvor mange rette man har
